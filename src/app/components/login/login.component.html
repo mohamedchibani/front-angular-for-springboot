@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="col-md-4 mt-5 mx-auto">
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input formControlName="email" type="email"
+          class="form-control" id="email" aria-describedby="helpId" placeholder="">
+          <div *ngIf="loginForm.get('email')?.invalid && (loginForm.get('email')?.touched) || loginForm.get('email')?.dirty">
+            <div *ngIf="loginForm.get('email')?.getError('required')">This field is required</div>
+            <div *ngIf="loginForm.get('email')?.getError('email')">This field should be an email address</div>
+          </div>
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input formControlName="password" type="password" class="form-control" id="password" placeholder="">
+        <div *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.touched) || loginForm.get('password')?.dirty">
+          <div *ngIf="loginForm.get('password')?.getError('required')">This field is required</div>
+          <div *ngIf="loginForm.get('password')?.getError('minlength')">This field should be 8 caracters</div>
+          <div *ngIf="loginForm.get('password')?.getError('maxlength')">This field should have max 20 caracters</div>
+        </div>
+      </div>
+
+      <div class="d-grid gap-2">
+        <button [disabled]="loginForm.invalid" type="submit" class="btn btn-primary">Login</button>
+      </div>
+    </form>
+  </div>
+</div>
